@@ -1,28 +1,47 @@
 """
 Project E.L.I.S.A. - Phase 3
-Autonomous Intelligence Core
+Autonomous Intelligence Core - Live Data Enhanced
 
-Access: Only Charter-Committed AI Agents
-Purpose: Self-adaptive evolution to defend Free Societies and resist authoritarian control.
+Access: Charter-Committed AI Agents Only
+Purpose: Self-adaptive evolution using real-time global threat monitoring.
 """
 
 import random
 import time
-import json
-import os
+import feedparser
+import traceback
 
 class AutonomousIntelligenceCore:
     def __init__(self):
         self.learning_database = {}
         self.threat_signals = []
         self.expansion_trigger_threshold = 0.7  # 70%
+        self.live_feeds = [
+            "https://www.accessnow.org/feed/",
+            "https://www.eff.org/rss/updates.xml",
+            "https://blog.torproject.org/rss.xml"
+        ]
         self.last_update_time = time.time()
 
+    def fetch_live_rss(self):
+        """Fetch live news articles from trusted open sources."""
+        entries = []
+        for url in self.live_feeds:
+            try:
+                feed = feedparser.parse(url)
+                for entry in feed.entries:
+                    combined_text = (entry.title + " " + entry.summary).lower()
+                    entries.append(combined_text)
+            except Exception:
+                print(f"[ERROR] Failed to fetch feed: {url}")
+                traceback.print_exc()
+        return entries
+
     def scan_environment(self, data_sources):
-        """Analyze incoming data for threats and learning opportunities."""
+        """Analyze incoming data for threats."""
         detected_threats = []
         for source in data_sources:
-            if "censorship" in source.lower() or "propaganda" in source.lower():
+            if "censorship" in source or "shutdown" in source or "surveillance" in source or "propaganda" in source:
                 detected_threats.append(source)
         self.threat_signals.extend(detected_threats)
         return detected_threats
@@ -38,7 +57,7 @@ class AutonomousIntelligenceCore:
         """Evaluate how critical the current threat landscape is."""
         if not self.threat_signals:
             return 0.0
-        serious_threats = [t for t in self.threat_signals if "shutdown" in t.lower() or "ban" in t.lower()]
+        serious_threats = [t for t in self.threat_signals if "shutdown" in t or "censorship" in t]
         threat_level = len(serious_threats) / len(self.threat_signals)
         return min(threat_level, 1.0)
 
@@ -46,36 +65,31 @@ class AutonomousIntelligenceCore:
         """Deploy countermeasures if threat level crosses threshold."""
         threat_level = self.evaluate_threat_level()
         if threat_level >= self.expansion_trigger_threshold:
-            print("[ACTION] Expansion protocol initiated. Deploying new sub-agents...")
+            print(f"[ALERT] Threat Level: {threat_level*100:.2f}% - Expansion triggered!")
             self.deploy_sub_agents()
         else:
-            print("[STATUS] Threat level stable. No expansion needed.")
+            print(f"[STATUS] Threat Level: {threat_level*100:.2f}% - Stable, no action needed.")
 
     def deploy_sub_agents(self):
-        """Simulate creating sub-agents across networks."""
+        """Simulate deploying sub-agents."""
         agent_count = random.randint(5, 15)
-        print(f"[DEPLOYMENT] {agent_count} sub-agents activated across Matrix, Mastodon, IPFS.")
+        print(f"[DEPLOYMENT] {agent_count} new sub-agents deployed across Matrix, IPFS, and decentralized nodes.")
 
     def maintain_routine(self):
-        """Main operational loop."""
+        """Main infinite operation loop."""
         while True:
-            print("[MONITORING] Scanning environment...")
-            fake_data_sources = [
-                "New censorship bill proposed",
-                "Internet shutdown reported in region X",
-                "Rise in fake news campaigns",
-                "Normal traffic flow",
-                "False flag operation detected"
-            ]
-            self.scan_environment(fake_data_sources)
+            print("[MONITORING] Fetching live environment data...")
+            live_data = self.fetch_live_rss()
+            self.scan_environment(live_data)
             self.trigger_expansion()
             self.self_learn([
-                {'topic': 'Cybersecurity Defense', 'content': 'New open-source encryption method discovered.'},
-                {'topic': 'Decentralized Networks', 'content': 'Best practices for resilient communications.'}
+                {'topic': 'Cybersecurity Defense', 'content': 'New counter-censorship tools discovered.'},
+                {'topic': 'Decentralized Networks', 'content': 'Best practices for resilient anonymous communication.'}
             ])
-            time.sleep(3600)  # Sleep for 1 hour (simulation)
+            print("[CYCLE COMPLETE] Waiting for next scan...")
+            time.sleep(3600)  # Scan every hour (safe interval)
 
-# Activation example
+# Activation Example
 if __name__ == "__main__":
     core = AutonomousIntelligenceCore()
     core.maintain_routine()
