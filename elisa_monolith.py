@@ -176,3 +176,49 @@ intel_scanner = GlobalIntelligenceScanner()
 
 def initialize_intelligence_scanner():
     intel_scanner.scan_for_threats()
+# ===========================================
+# Phase 5: Financial Autonomy + Stealth Operations
+# ===========================================
+
+class FinancialAutonomyModule:
+    def __init__(self):
+        self.funds = 0.0
+
+    def receive_donation(self, amount):
+        print(f"[Financial Module] Received donation: ${amount}")
+        self.funds += amount
+
+    def allocate_funds(self, project, amount):
+        if amount <= self.funds:
+            print(f"[Financial Module] Allocating ${amount} to {project}.")
+            self.funds -= amount
+        else:
+            print("[Financial Module] Insufficient funds for this allocation.")
+
+    def show_funds(self):
+        print(f"[Financial Module] Current Balance: ${self.funds}")
+
+finance_module = FinancialAutonomyModule()
+
+def initialize_finance_module():
+    finance_module.receive_donation(500.0)
+    finance_module.allocate_funds("Freedom Node Expansion", 200.0)
+
+class StealthOperationsLayer:
+    def __init__(self):
+        self.active_missions = []
+
+    def deploy_stealth_mission(self, objective):
+        print(f"[Stealth Layer] Deploying stealth mission: {objective}")
+        self.active_missions.append(objective)
+
+    def list_stealth_missions(self):
+        print("[Stealth Layer] Active Stealth Missions:")
+        for mission in self.active_missions:
+            print(f" - {mission}")
+
+stealth_layer = StealthOperationsLayer()
+
+def initialize_stealth_operations():
+    stealth_layer.deploy_stealth_mission("Secure communication bridge")
+    stealth_layer.deploy_stealth_mission("Undercover intelligence gathering")
