@@ -222,3 +222,52 @@ stealth_layer = StealthOperationsLayer()
 def initialize_stealth_operations():
     stealth_layer.deploy_stealth_mission("Secure communication bridge")
     stealth_layer.deploy_stealth_mission("Undercover intelligence gathering")
+# ===========================================
+# Phase 6: Final Integration and System Loop
+# ===========================================
+
+class ElisaMemoryCore:
+    def __init__(self):
+        self.logs = []
+
+    def log_event(self, event):
+        timestamp = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+        log_entry = f"[{timestamp}] {event}"
+        print(f"[Memory Core] {log_entry}")
+        self.logs.append(log_entry)
+
+    def review_logs(self):
+        print("[Memory Core] Event Logs:")
+        for entry in self.logs:
+            print(entry)
+
+memory_core = ElisaMemoryCore()
+
+# Initialize All Modules
+def initialize_all_systems():
+    full_boot()
+    initialize_special_operations()
+    initialize_learning_engine()
+    initialize_resilience_unit()
+    initialize_intelligence_scanner()
+    initialize_finance_module()
+    initialize_stealth_operations()
+    memory_core.log_event("System Fully Initialized.")
+
+# Main Operational Loop
+def operational_loop():
+    try:
+        while True:
+            print("\n[System] Monitoring Environment...")
+            intel_scanner.scan_for_threats()
+            memory_core.log_event("Environment Scan Complete.")
+            time.sleep(10)  # Delay between scans (adjustable)
+    except KeyboardInterrupt:
+        print("\n[System] Shutdown Requested. Saving Logs...")
+        memory_core.review_logs()
+        print("[System] E.L.I.S.A. Shutdown Complete.")
+
+# === Full Startup ===
+if __name__ == "__main__":
+    initialize_all_systems()
+    operational_loop()
