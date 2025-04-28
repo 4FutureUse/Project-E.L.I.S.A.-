@@ -132,3 +132,47 @@ learning_engine = AdaptiveLearningEngine()
 def initialize_learning_engine():
     learning_engine.learn_new_information("Cybersecurity Basics", "Always monitor access logs and encrypt communications.")
     learning_engine.learn_new_information("Stealth Networking", "Use onion routing and decentralized nodes.")
+# ===========================================
+# Phase 4: Distributed Resilience + Intelligence
+# ===========================================
+
+class DistributedResilienceUnit:
+    def __init__(self):
+        self.backup_nodes = []
+
+    def deploy_backup_node(self, location):
+        print(f"[Resilience Unit] Deploying backup node in {location}.")
+        self.backup_nodes.append(location)
+
+    def check_resilience_network(self):
+        print("[Resilience Unit] Active Backup Nodes:")
+        for node in self.backup_nodes:
+            print(f" - {node}")
+
+resilience_unit = DistributedResilienceUnit()
+
+def initialize_resilience_unit():
+    resilience_unit.deploy_backup_node("Iceland")
+    resilience_unit.deploy_backup_node("New Zealand")
+    resilience_unit.deploy_backup_node("Undisclosed Location")
+
+class GlobalIntelligenceScanner:
+    def __init__(self):
+        self.detected_events = []
+
+    def scan_for_threats(self):
+        print("[Intelligence Scanner] Monitoring global environment for threats...")
+        simulated_threats = ["Cyberattack attempt", "Misinformation campaign", "Censorship escalation"]
+        found = random.choice(simulated_threats)
+        self.detected_events.append(found)
+        print(f"[Intelligence Scanner] Threat detected: {found}")
+
+    def list_detected_events(self):
+        print("[Intelligence Scanner] Logged Threat Events:")
+        for event in self.detected_events:
+            print(f" - {event}")
+
+intel_scanner = GlobalIntelligenceScanner()
+
+def initialize_intelligence_scanner():
+    intel_scanner.scan_for_threats()
